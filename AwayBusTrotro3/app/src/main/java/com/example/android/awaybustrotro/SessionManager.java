@@ -34,22 +34,22 @@ public class SessionManager {
     private static final String IS_LOGIN = "IsLoggedIn";
 
     // User name (make variable public to access from outside)
-    public static final String KEY_NAME = null;
+    public static final String KEY_NAME = "user";
 
     // Password (make variable public to access from outside)
-    public static final String KEY_PASSWORD = null;
+    public static final String KEY_PASSWORD = "password";
 
     // Car number (make variable public to access from outside)
-    public static final String KEY_CAR_NUMBER = null;
+    public static final String KEY_CAR_NUMBER = "number";
 
     // Start station (make variable public to access from outside)
-    public static final String KEY_START_STATION = null;
+    public static final String KEY_START_STATION = "start";
 
     // End Station (make variable public to access from outside)
-    public static final String KEY_END_STATION = null;
+    public static final String KEY_END_STATION = "end";
 
     //Station name (make variable public to access from outside)
-    public static final String KEY_STATION_NAME=null;
+    public static final String KEY_STATION_NAME="station";
 
     // Constructor
     public SessionManager(Context context){
@@ -106,6 +106,18 @@ public class SessionManager {
 
             // Staring Login Activity
             _context.startActivity(i);
+        }else{
+            // user is not logged in redirect him to Login Activity
+            Intent i = new Intent(_context, SummaryScreen.class);
+            // Closing all the Activities
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+            // Add new Flag to start new Activity
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            // Staring Login Activity
+            _context.startActivity(i);
+
         }
 
     }

@@ -55,7 +55,7 @@ public class LoginScreen extends AppCompatActivity {
          * This will redirect user to LoginActivity is he is not
          * logged in
          * */
-        session.checkLogin();
+        //session.checkLogin();
         //session.logoutUser();
 
 
@@ -80,7 +80,6 @@ public class LoginScreen extends AppCompatActivity {
     }
         public void summaryScreen(View view) {
             session.createLoginSession(UserNameInput.getText().toString(), PasswordInput.getText().toString(), CarNumberInput.getText().toString(), StationNameInput.getText().toString(), StartStationInput.getText().toString(), EndStationInput.getText().toString());
-            Toast.makeText(LoginScreen.this,"Password "+PasswordInput.getText().toString(),Toast.LENGTH_SHORT).show();
             Intent intent =new Intent(this,SummaryScreen.class);
                 startActivity(intent);
 

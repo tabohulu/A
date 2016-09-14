@@ -67,4 +67,9 @@ SessionManager sessionManager;
         finish();
 
     }
+
+    public void endApp(){
+        //System.exit(1);
+        sessionManager.logoutUser();
+    }
 }
