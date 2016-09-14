@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AwayBusTrotro</string>
+    <string name="welcome_msg">Thank you for using AwayBus. Some setup is required before
+        you begin. Click on the button below to begin</string>
+</resources>
