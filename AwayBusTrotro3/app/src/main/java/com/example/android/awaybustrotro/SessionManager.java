@@ -32,6 +32,8 @@ public class SessionManager {
 
     // All Shared Preferences Keys
     private static final String IS_LOGIN = "IsLoggedIn";
+    private static final String IS_INITIALIZED = "IsLoggedIn";
+
 
     // User name (make variable public to access from outside)
     public static final String KEY_NAME = "user";
@@ -64,6 +66,7 @@ public class SessionManager {
     public void createLoginSession(String name, String password, String plate_number, String stationName, String start, String end){
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
+        editor.putBoolean(IS_INITIALIZED, true);
 
         // Storing name in pref
         editor.putString(KEY_NAME, name);
@@ -93,9 +96,38 @@ public class SessionManager {
      * If false it will redirect user to login page
      * Else won't do anything
      * */
-    public void checkLogin(){
+   public void checkLogin(){
         // Check login status
         if(!this.isLoggedIn()){
+            // user is not logged in redirect him to Login Activity
+            Intent i = new Intent(_context, MainLoginScreen.class);
+            // Closing all the Activities
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+             // Add new Flag to start new Activity
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            // Staring Login Activity
+            _context.startActivity(i);
+        }else{
+            // user is not logged in redirect him to Login Activity
+            Intent i = new Intent(_context, Main2Activity.class);
+            // Closing all the Activities
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+            // Add new Flag to start new Activity
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            // Staring Login Activity
+            _context.startActivity(i);
+
+        }
+
+    }
+
+    public void checkInstantiated(){
+        // Check instantiated status
+        if(!this.isInitialized()){
             // user is not logged in redirect him to Login Activity
             Intent i = new Intent(_context, MainActivity.class);
             // Closing all the Activities
@@ -106,18 +138,6 @@ public class SessionManager {
 
             // Staring Login Activity
             _context.startActivity(i);
-        }else{
-            // user is not logged in redirect him to Login Activity
-            Intent i = new Intent(_context, SummaryScreen.class);
-            // Closing all the Activities
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-            // Add new Flag to start new Activity
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-            // Staring Login Activity
-            _context.startActivity(i);
-
         }
 
     }
@@ -159,8 +179,8 @@ public class SessionManager {
         editor.clear();
         editor.commit();
 
-        // After logout redirect user to Loing Activity
-        Intent i = new Intent(_context, LoginScreen.class);
+        // After logout redirect user to Login Activity
+        Intent i = new Intent(_context, MainLoginScreen.class);
         // Closing all the Activities
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
@@ -177,6 +197,10 @@ public class SessionManager {
     // Get Login State
     public boolean isLoggedIn(){
         return pref.getBoolean(IS_LOGIN, false);
+    }
+
+    public boolean isInitialized(){
+        return pref.getBoolean(IS_INITIALIZED, false);
     }
 
 }

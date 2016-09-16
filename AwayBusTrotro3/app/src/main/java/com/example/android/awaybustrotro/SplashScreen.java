@@ -19,6 +19,7 @@ SessionManager sessionManager;
                 }catch (InterruptedException e){
                     e.printStackTrace();
                 }finally {
+                    sessionManager.checkInstantiated();
                     sessionManager.checkLogin();
                 }
             }

@@ -1,5 +1,6 @@
 package com.example.android.awaybustrotro;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -68,8 +69,8 @@ SessionManager sessionManager;
 
     }
 
-    public void endApp(){
-        //System.exit(1);
-        sessionManager.logoutUser();
+    public void toMainScreen(View view){
+        Intent intent = new Intent(this,Main2Activity.class);
+        startActivity(intent);
     }
 }

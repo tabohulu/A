@@ -130,6 +130,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:text="finish"
-        android:onClick="endApp"/>
+        android:onClick="toMainScreen"/>
 
 </RelativeLayout>
