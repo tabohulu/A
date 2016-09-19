@@ -15,11 +15,12 @@ SessionManager sessionManager;
         Thread timer = new Thread(){
             public void run(){
                 try {
-                    sleep(5000);
+                    sleep(3000);
                 }catch (InterruptedException e){
                     e.printStackTrace();
                 }finally {
-                    sessionManager.checkInstantiated();
+                    SplashScreen.this.finish();
+                   // sessionManager.checkInstantiated();
                     sessionManager.checkLogin();
                 }
             }

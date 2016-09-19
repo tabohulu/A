@@ -30,7 +30,8 @@
         <activity android:name=".LoginScreen" />
         <activity android:name=".SummaryScreen" />
         <activity android:name=".MainLoginScreen" />
-        <activity android:name=".Main2Activity"></activity>
+        <activity android:name=".Main2Activity" />
+        <activity android:name=".UserInputSummary"></activity>
     </application>
 
 </manifest>

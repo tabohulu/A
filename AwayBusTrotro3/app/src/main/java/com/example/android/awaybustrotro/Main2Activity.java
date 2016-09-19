@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -21,7 +22,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Main2Activity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class Main2Activity extends AppCompatActivity  {
     String[] mobileArray = {"Android", "IPhone", "WindowsMobile", "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X"};
     String[] currentArray;
     String[] mobileArrayInv = {"Max OS X", "Windows7", "Ubuntu","WebOS","Blackberry","WindowsMobile","IPhone","Android"};
@@ -34,6 +35,8 @@ public class Main2Activity extends AppCompatActivity implements AdapterView.OnIt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
+        selectedItem="Tech -> Kejetia";
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
 // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
@@ -42,6 +45,22 @@ public class Main2Activity extends AppCompatActivity implements AdapterView.OnIt
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
         spinner.setAdapter(adapter1);
+        spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedItem= parent.getItemAtPosition(position).toString();
+                Toast.makeText(parent.getContext(),selectedItem,Toast.LENGTH_SHORT).show();
+                ListAdapter adapter = new CustomAdaptNew(parent.getContext(), chooseArray(selectedItem));
+                ListView listview = (ListView) findViewById(R.id.stops_list);
+                assert listview != null;
+                listview.setAdapter(adapter);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         ListAdapter adapter = new CustomAdaptNew(this, chooseArray(selectedItem));
         //ListAdapter adapter = new ArrayAdapter<String>(this,R.layout.activity_listview,mobileArray);
@@ -79,6 +98,7 @@ public class Main2Activity extends AppCompatActivity implements AdapterView.OnIt
     }
 
     public void setpassinputs(){
+        passengerStops="";
         for(int i=0;i<inputs.length;i++){
             if(!inputs[i].equals("")){
                 passengerStops+=inputs[i]+"\n";
@@ -88,9 +108,9 @@ public class Main2Activity extends AppCompatActivity implements AdapterView.OnIt
         }
     }
 
-   /* public void summaryNext(View view)
+   public void toSummary(View view)
     {
-        Intent intent = new Intent(this, Main4Activity.class);
+        Intent intent = new Intent(this, UserInputSummary.class);
         String msg=inputInfo(mobileArray);
         setpassinputs();
         if (!passengerStops.equals("")){
@@ -102,7 +122,7 @@ public class Main2Activity extends AppCompatActivity implements AdapterView.OnIt
         }else {
             Toast.makeText(Main2Activity.this,"Empty inputs available",Toast.LENGTH_SHORT).show();
         }
-    }*/
+    }
 
     public String[] chooseArray(String item){
         switch (item){
@@ -116,15 +136,6 @@ public class Main2Activity extends AppCompatActivity implements AdapterView.OnIt
         return currentArray;
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-       selectedItem= parent.getItemAtPosition(position).toString();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
 
     class CustomAdaptNew extends ArrayAdapter<String> {
 
