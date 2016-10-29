@@ -9,6 +9,7 @@ import android.widget.TextView;
 public class UserInputSummary extends AppCompatActivity {
     TextView tv;
     TextView tv2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,19 +17,18 @@ public class UserInputSummary extends AppCompatActivity {
         getSummary();
     }
 
-    public void getSummary()
-    {
+    public void getSummary() {
         Intent intent = getIntent();
-        Bundle extras =intent.getExtras();
+        Bundle extras = intent.getExtras();
         String msg = extras.getString("MSG");
         String msg2 = extras.getString("SDG");
-         tv = (TextView) findViewById(R.id.stops_tv);
+        tv = (TextView) findViewById(R.id.stops_tv);
         tv.setText(msg);
-         tv2 = (TextView) findViewById(R.id.userinput_tv);
+        tv2 = (TextView) findViewById(R.id.userinput_tv);
         tv2.setText(msg2);
     }
 
-    public void backToInputs(View view){
+    public void backToInputs(View view) {
         UserInputSummary.this.finish();
 
     }
